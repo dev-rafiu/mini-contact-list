@@ -4,11 +4,20 @@ import axios from "axios";
 import { useGlobalContext } from "../App";
 
 function CreateArea() {
-  const { handleSubmit, firstNameRef, lastNameRef, phoneRef, isEditing } =
-    useGlobalContext();
+  const {
+    handleSubmit,
+    firstNameRef,
+    lastNameRef,
+    phoneRef,
+    isEditing,
+    showForm,
+  } = useGlobalContext();
 
   return (
-    <div className="create-area container">
+    <div
+      className="create-area container"
+      style={{ display: showForm ? "block" : "none" }}
+    >
       <form onSubmit={handleSubmit} className="contact-form">
         <div className="form-control flex">
           <span></span>

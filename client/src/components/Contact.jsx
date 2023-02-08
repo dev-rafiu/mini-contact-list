@@ -7,7 +7,6 @@ import { FaEllipsisV, FaTrash, FaEdit } from "react-icons/fa";
 
 function Contact({ _id, firstName, lastName, phone }) {
   const [showOptions, setShowOptions] = useState(false);
-
   const { getContacts, handleEdit, deleteContact } = useGlobalContext();
 
   return (

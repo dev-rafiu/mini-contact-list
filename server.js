@@ -3,13 +3,16 @@ const mongoose = require("mongoose");
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
+
 const notFound = require("./middleware/notFound");
 const contactControllers = require("./routes/controllers");
 const connectDB = require("./db/connect");
 
 const app = express();
+
 const cors = require("cors");
 app.use(cors({ methods: ["GET", "POST", "PATCH", "DELETE"] }));
+
 const PORT = process.env.PORT || 5001;
 const URL = process.env.MONGO_URI;
 

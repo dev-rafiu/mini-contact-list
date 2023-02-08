@@ -1,11 +1,14 @@
 import React from "react";
 import { HiUserAdd } from "react-icons/hi";
+import { useGlobalContext } from "../App";
 
 function CreateNewContact() {
+  const { setShowForm } = useGlobalContext();
+
   return (
     <div className="create-new-section container">
       <HiUserAdd />
-      <button className="create-new-btn" aria-label="create new contact">
+      <button onClick={() => setShowForm(true)} className="create-new-btn">
         Create new contact
       </button>
     </div>

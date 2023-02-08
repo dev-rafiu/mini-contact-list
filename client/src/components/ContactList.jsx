@@ -6,11 +6,9 @@ import { useGlobalContext } from "../App";
 function ContactList() {
   const { query, contacts, getContacts } = useGlobalContext();
 
-  const searchedContacts =
-    contacts.data &&
-    contacts.data.filter((contact) =>
-      contact.firstName.toLowerCase().includes(query.toLowerCase())
-    );
+  const searchedContacts = contacts.data?.filter((contact) =>
+    contact.firstName.toLowerCase().includes(query.toLowerCase())
+  );
 
   useEffect(() => {
     getContacts();
@@ -19,10 +17,9 @@ function ContactList() {
   return (
     <div className="contact-list-section container">
       <ul className="contact-list">
-        {searchedContacts &&
-          searchedContacts.map((contact) => (
-            <Contact key={contact._id} {...contact} />
-          ))}
+        {searchedContacts?.map((contact) => (
+          <Contact key={contact._id} {...contact} />
+        ))}
       </ul>
     </div>
   );

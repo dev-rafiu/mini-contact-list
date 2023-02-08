@@ -17,6 +17,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   // get contacts from database
   const getContacts = async () => {
@@ -48,7 +49,7 @@ function App() {
     if (!firstName && !phone) {
       return;
     }
-    // if firstName and phone are not empty string and isEditing is true
+    // if firstName and phone are not empty and isEditing is true then edit the contact
     else if (firstName && phone && isEditing) {
       const contactToEdit = contacts.data.find(
         (contact) => contact._id === editID
@@ -64,6 +65,7 @@ function App() {
       createNewContact(newContact);
     }
     reset();
+    setShowForm(false);
   };
 
   // =========
@@ -83,7 +85,7 @@ function App() {
   // =========
   const updateContact = async (contact) => {
     try {
-      await axios.patch(`/api/contacts/${contact._id}`, contact);
+      await axios.put(`/api/contacts/${contact._id}`, contact);
       getContacts();
       setIsEditing(false);
     } catch (error) {
@@ -128,6 +130,8 @@ function App() {
     isEditing,
     handleEdit,
     deleteContact,
+    showForm,
+    setShowForm,
   };
   return (
     <AppContext.Provider value={value}>

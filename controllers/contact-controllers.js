@@ -2,7 +2,7 @@ const Contact = require("../models/Contact");
 
 const getContacts = async (req, res) => {
   try {
-    const contacts = await Contact.find({});
+    const contacts = await Contact.find({}).sort({ firstName: 1 });
     res.status(200).json({ nHits: contacts.length, data: contacts });
   } catch (error) {
     console.log(error);
@@ -12,11 +12,9 @@ const getContacts = async (req, res) => {
 const getContact = async (req, res) => {
   const { id } = req.params;
   try {
-    const contactToDelete = await Contact.find({ _id: id });
-    if (!contactToDelete) {
-      return res
-        .status(404)
-        .json({ success: "error", msg: `no contact with id ${id}` });
+    const contact = await Contact.find({ _id: id });
+    if (!contact) {
+      return res.status(404).json({ msg: `error, no contact with id ${id}` });
     }
     res.status(200).json({ msg: `contact with id ${id} deleted` });
   } catch (error) {
@@ -38,9 +36,7 @@ const updateContact = async (req, res) => {
   try {
     const contactToEdit = await Contact.findOneAndUpdate({ _id: id }, req.body);
     if (!contactToEdit) {
-      return res
-        .status(404)
-        .json({ success: "error", msg: `no contact with id ${id}` });
+      return res.status(404).json({ msg: `error, no contact with id ${id}` });
     }
     res.status(200).json({ msg: `contact updated`, data: contactToEdit });
   } catch (error) {
@@ -53,9 +49,7 @@ const deleteContact = async (req, res) => {
   try {
     const contactToDelete = await Contact.findOneAndDelete({ _id: id });
     if (!contactToDelete) {
-      return res
-        .status(404)
-        .json({ success: "error", msg: `no contact with id ${id}` });
+      return res.status(404).json({ msg: `error, no contact with id ${id}` });
     }
     res.status(200).json({ msg: `contact with id ${id} deleted` });
   } catch (error) {
