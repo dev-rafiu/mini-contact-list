@@ -10,6 +10,8 @@ function ContactList() {
     contact.firstName.toLowerCase().includes(query.toLowerCase())
   );
 
+  // console.log(searchedContacts);
+
   useEffect(() => {
     getContacts();
   }, []);
